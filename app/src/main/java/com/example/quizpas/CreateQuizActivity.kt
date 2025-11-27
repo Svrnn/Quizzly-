@@ -1,7 +1,10 @@
 package com.example.quizpas
 
+import android.content.Intent // PENTING: Jangan lupa import ini
 import android.os.Bundle
+import android.view.Gravity
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.quizpas.databinding.ActivityCreateQuizBinding
@@ -15,23 +18,20 @@ class CreateQuizActivity : AppCompatActivity() {
         binding = ActivityCreateQuizBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // --- 1. MENGISI DATA SPINNER (KATEGORI) ---
-
-        // Daftar kategori yang kamu mau
+        // --- 1. MENGISI DATA SPINNER ---
         val categories = arrayOf("Pilih Kategori", "Sejarah", "Geografi", "Sains", "Matematika", "Literatur", "Seni")
 
-        // Membuat Adapter untuk menghubungkan data ke Spinner
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, categories)
+        // Pakai layout custom spinner_item agar teks berwarna HITAM
+        val adapter = ArrayAdapter(this, R.layout.spinner_item, categories)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        // Memasang adapter ke Spinner
         binding.spCategory.adapter = adapter
 
+        // --- 2. LOGIKA TOMBOL ---
 
-        // --- 2. LOGIKA LAINNYA ---
-
-        // Tombol Close (X)
+        // Tombol Close
         binding.btnClose.setOnClickListener {
-            finish() // Kembali ke menu sebelumnya
+            finish()
         }
 
         // Tombol Lanjut
@@ -41,15 +41,40 @@ class CreateQuizActivity : AppCompatActivity() {
             val kategori = binding.spCategory.selectedItem.toString()
 
             if (judul.isEmpty()) {
-                Toast.makeText(this, "Judul kuis harus diisi!", Toast.LENGTH_SHORT).show()
-            } else if (kategori == "Pilih Kategori") {
-                Toast.makeText(this, "Silakan pilih kategori!", Toast.LENGTH_SHORT).show()
-            } else {
-                // Kalau sukses
-                Toast.makeText(this, "Kuis '$judul' kategori $kategori dibuat!", Toast.LENGTH_SHORT).show()
+                showCustomToast("Judul kuis harus diisi!")
+            }
+            else if (kategori == "Pilih Kategori") {
+                showCustomToast("Silakan pilih kategori!")
+            }
+            else {
+                // --- JIKA SUKSES ---
 
-                // Nanti di sini pindah ke halaman buat soal...
+                // 1. Tampilkan pesan sukses (Opsional)
+                // Toast.makeText(this, "Kuis '$judul' berhasil dibuat!", Toast.LENGTH_SHORT).show()
+
+                // 2. PINDAH KE HALAMAN TAMBAH PERTANYAAN
+                val intent = Intent(this, AddQuestionActivity::class.java)
+
+                // (Opsional) Kalau mau kirim data judul ke halaman sebelah:
+                // intent.putExtra("QUIZ_TITLE", judul)
+
+                startActivity(intent)
             }
         }
+    }
+
+    // --- FUNGSI CUSTOM TOAST ---
+    private fun showCustomToast(message: String) {
+        val inflater = layoutInflater
+        val layout = inflater.inflate(R.layout.custom_toast, null)
+
+        val textView = layout.findViewById<TextView>(R.id.tvToastMessage)
+        textView.text = message
+
+        val toast = Toast(applicationContext)
+        toast.duration = Toast.LENGTH_SHORT
+        toast.view = layout
+        toast.setGravity(Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL, 0, 150)
+        toast.show()
     }
 }

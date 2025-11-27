@@ -6,21 +6,29 @@
     android:background="@color/white"
     android:padding="24dp">
 
-    <ImageView
-        android:id="@+id/btnClose"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@drawable/ic_close"
-        android:contentDescription="Tutup"/>
-
-    <TextView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/headerContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Buat Kuis"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#000000"
-        android:layout_centerHorizontal="true"/>
+        android:layout_marginTop="30dp">
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_close"
+            android:layout_centerVertical="true"
+            android:contentDescription="Tutup"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Buat Kuis"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/dotsIndicator"
@@ -28,19 +36,21 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp">
-
+        android:layout_below="@id/headerContainer"
+        android:layout_marginTop="40dp">
         <View
             android:layout_width="8dp"
             android:layout_height="8dp"
             android:background="#000000"
             android:layout_marginEnd="8dp"
             android:backgroundTint="#000000"
-            style="@style/Widget.AppCompat.Button.Small"/> <View
-        android:layout_width="8dp"
-        android:layout_height="8dp"
-        android:background="#E0E0E0"
-        android:layout_marginEnd="8dp"/>
+            style="@style/Widget.AppCompat.Button.Small"/>
+
+        <View
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="#E0E0E0"
+            android:layout_marginEnd="8dp"/>
 
         <View
             android:layout_width="8dp"
@@ -59,23 +69,27 @@
             android:id="@+id/etQuizTitle"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:hint="Judul Kuis"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/bg_input_flat"
+            android:hint="Judul Kuis"
             android:paddingHorizontal="16dp"
-            android:textSize="14sp"
-            android:layout_marginBottom="16dp"/>
+            android:textColor="@color/black"
+            android:textColorHint="#121212"
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/etQuizDesc"
             android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:hint="Deskripsi Kuis"
-            android:gravity="top|start"
-            android:paddingTop="16dp"
+            android:layout_marginBottom="16dp"
             android:background="@drawable/bg_input_flat"
+            android:gravity="top|start"
+            android:hint="Deskripsi Kuis"
             android:paddingHorizontal="16dp"
-            android:textSize="14sp"
-            android:layout_marginBottom="16dp"/>
+            android:paddingTop="16dp"
+            android:textColor="@color/black"
+            android:textColorHint="#121212"
+            android:textSize="14sp" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -86,7 +100,7 @@
                 android:id="@+id/spCategory"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="8dp" />
+                android:paddingStart="8dp"/>
 
         </FrameLayout>
 

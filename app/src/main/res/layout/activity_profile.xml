@@ -21,14 +21,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp">
-
                 <ImageView
                     android:id="@+id/btnBack"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_arrow_back"
                     android:layout_centerVertical="true"/>
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -45,33 +43,31 @@
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_marginBottom="24dp">
-
                 <androidx.cardview.widget.CardView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     app:cardCornerRadius="50dp"
-                    app:cardElevation="0dp">
-                    <ImageView
-                        android:id="@+id/ivProfile"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:src="@drawable/my_profile_image"
-                        android:scaleType="centerCrop"/>
-                </androidx.cardview.widget.CardView>
-
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#F5F5F5"> <ImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/outline_account_circle_24"
+                    android:padding="15dp"
+                    android:scaleType="fitCenter"
+                    app:tint="#757575"/> </androidx.cardview.widget.CardView>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Arya Aryo"
+                    android:text="User"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:textColor="#000000"
                     android:layout_marginTop="16dp"/>
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Skor Total: 1250"
+                    android:text="Skor Total: 0"
                     android:textSize="14sp"
                     android:textColor="#00A9FF"
                     android:layout_marginTop="4dp"/>
@@ -104,7 +100,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginBottom="16dp">
-
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -122,13 +117,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="25"
+                        android:text="0"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         android:textColor="#000000"
                         android:layout_marginTop="4dp"/>
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -146,7 +140,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="27%"
+                        android:text="0%"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         android:textColor="#000000"
@@ -170,7 +164,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="32"
+                    android:text="-"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:textColor="#000000"
@@ -186,7 +180,6 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:background="?attr/selectableItemBackground">
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -194,7 +187,6 @@
                     android:text="Riwayat Kuis"
                     android:textSize="16sp"
                     android:textColor="#424242"/>
-
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
@@ -204,7 +196,6 @@
 
         </LinearLayout>
     </ScrollView>
-
 
     <LinearLayout
         android:id="@+id/bottomNav"
@@ -225,12 +216,14 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_home"/>
+                android:src="@drawable/ic_home"
+                app:tint="#000000"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Beranda"
-                android:textSize="12sp"/>
+                android:textSize="12sp"
+                android:textColor="#000000"/>
         </LinearLayout>
 
         <LinearLayout
@@ -243,12 +236,14 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_list"/>
+                android:src="@drawable/ic_list"
+                app:tint="#000000"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Kategori"
-                android:textSize="12sp"/>
+                android:textSize="12sp"
+                android:textColor="#000000"/>
         </LinearLayout>
 
         <LinearLayout
@@ -262,12 +257,13 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_profile"
-                app:tint="#000000"/> <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Profil"
-            android:textSize="12sp"
-            android:textColor="#000000"/>
+                app:tint="#00A9FF"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Profil"
+                android:textSize="12sp"
+                android:textColor="#00A9FF"/>
         </LinearLayout>
 
     </LinearLayout>

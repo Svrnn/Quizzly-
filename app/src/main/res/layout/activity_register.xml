@@ -22,22 +22,30 @@
             android:textColor="#000000"
             android:layout_gravity="center_horizontal"
             android:drawablePadding="8dp"
-            android:layout_marginBottom="40dp"/>
+            android:layout_marginBottom="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Buat akun Anda"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Buat akun"
-            android:textSize="20sp"
+            android:text="Nama Pengguna"
             android:textStyle="bold"
             android:textColor="#000000"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="8dp"/>
 
         <EditText
             android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:hint="Nama"
+            android:hint="Masukan nama pengguna"
             android:inputType="textPersonName"
             android:background="@drawable/bg_input_flat"
             android:paddingHorizontal="20dp"
@@ -46,11 +54,19 @@
             android:textColor="#000000"
             android:layout_marginBottom="16dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email Pengguna"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginBottom="8dp"/>
+
         <EditText
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:hint="Email"
+            android:hint="Masukan Gmail pengguna"
             android:inputType="textEmailAddress"
             android:background="@drawable/bg_input_flat"
             android:paddingHorizontal="20dp"
@@ -59,11 +75,19 @@
             android:textColor="#000000"
             android:layout_marginBottom="16dp"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Masukan Kata Sandi"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginBottom="8dp"/>
+
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:hint="Kata sandi"
+            android:hint="Masukan kata sandi pengguna"
             android:inputType="textPassword"
             android:background="@drawable/bg_input_flat"
             android:paddingHorizontal="20dp"

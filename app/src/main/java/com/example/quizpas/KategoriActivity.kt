@@ -14,18 +14,29 @@ class KategoriActivity : AppCompatActivity() {
         binding = ActivityKategoriBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Navigasi Bawah: Tombol Beranda -> Balik ke HomeActivity
+        // 1. Aksi Klik Kategori SEJARAH (BARU)
+        binding.btnSejarah.setOnClickListener {
+            // Pindah ke halaman Kuis
+            val intent = Intent(this, QuizGameActivity::class.java)
+            startActivity(intent)
+        }
+
+        // 2. Navigasi Bawah: Tombol Beranda -> Balik ke HomeActivity
         binding.btnNavHome.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
             finish()
         }
 
-        // Navigasi Bawah: Tombol Profil -> Pindah ke ProfileActivity
-        // (Pastikan ProfileActivity juga sudah dibuat nanti)
+        // 3. Navigasi Bawah: Tombol Profil -> Pindah ke ProfileActivity
         binding.btnNavProfile.setOnClickListener {
-            // val intent = Intent(this, ProfileActivity::class.java)
-            // startActivity(intent)
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+        }
+
+        // 4. Tombol Kategori (Opsional, diam saja karena sedang di halaman ini)
+        binding.btnNavCategory.setOnClickListener {
+            // Refresh halaman atau biarkan kosong
         }
     }
 }
