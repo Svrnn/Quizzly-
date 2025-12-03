@@ -1,4 +1,4 @@
-package com.example.quizpas // Sesuaikan nama package jika berbeda
+package com.example.quizpas
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 class QuizGameActivity : AppCompatActivity() {
 
     // Deklarasi Variabel UI
-    private lateinit var tvProgress: TextView      // Di XML id-nya tvProgress
-    private lateinit var progressBar: ProgressBar  // Di XML id-nya progressBar
+    private lateinit var tvProgress: TextView
+    private lateinit var progressBar: ProgressBar
     private lateinit var tvTimer: TextView
     private lateinit var tvQuestion: TextView
     private lateinit var rgOptions: RadioGroup
@@ -23,7 +23,8 @@ class QuizGameActivity : AppCompatActivity() {
 
     // Variabel Logika Game
     private var currentQuestionIndex = 0
-    private var score = 0
+    private var score = 0              // Menampung total skor
+    private var correctAnswers = 0     // Menampung jumlah jawaban benar
     private var countDownTimer: CountDownTimer? = null
 
     // Model Data Soal
@@ -33,32 +34,33 @@ class QuizGameActivity : AppCompatActivity() {
         val correctAnswerIndex: Int // 0, 1, 2, atau 3
     )
 
-    // Daftar Soal
+    // --- DAFTAR SOAL MEME NASIHUY ---
+    // Total 5 Soal (Nilai 20 poin per soal)
     private val questionList = listOf(
         Question(
-            "Siapa nama pendiri Ngawi Empire?",
-            listOf("Rusdi", "Satria Lionel", "Susilo Bambang Yudhoyono", "Arnolt"),
-            0 // Jawaban: Rusdi
+            "Siapakah pemimpin tertinggi dari Ngawi Empire?",
+            listOf("Rusdi", "Ambatron", "Mas Fuad", "Mr. Ironi"),
+            0 // Jawaban Benar: Rusdi
         ),
         Question(
-            "Ibu kota Indonesia yang baru bernama?",
-            listOf("Jakarta", "Nusantara", "Bandung", "Surabaya"),
-            1 // Jawaban: Nusantara
+            "Siapakah cyborg dari tahun 2050 yang menjadi musuh bebuyutan Ngawi?",
+            listOf("Megatron", "Ambatron", "Optimus Prime", "Terminator"),
+            1 // Jawaban Benar: Ambatron
         ),
         Question(
-            "2 + 2 x 2 = ?",
-            listOf("8", "6", "4", "10"),
-            1 // Jawaban: 6
+            "Apa pekerjaan asli Mas Rusdi sebelum menjadi raja?",
+            listOf("Presiden", "Tukang Cukur", "Dokter Gigi", "Pilot"),
+            1 // Jawaban Benar: Tukang Cukur (Barbershop)
         ),
         Question(
-            "Apa nama alat musik yang dimainkan dengan cara dipetik?",
-            listOf("Piano", "Gitar", "Suling", "Drum"),
-            1 // Jawaban: Gitar
+            "Dimana tempat persembunyian favorit Mas Fuad?",
+            listOf("Di atas genteng", "Di dalam kulkas", "Di bawah kasur", "Di dalam gua"),
+            1 // Jawaban Benar: Di dalam kulkas
         ),
         Question(
-            "Siapakah presiden pertama Indonesia?",
-            listOf("Soeharto", "BJ Habibie", "Soekarno", "Jokowi"),
-            2 // Jawaban: Soekarno
+            "Apa slogan legendaris dari kapybara 'Masbro'?",
+            listOf("Pinjam dulu seratus", "Gas ngeng", "Santai dulu gak sih", "Gak bahaya ta"),
+            2 // Jawaban Benar: Santai dulu gak sih
         )
     )
 
@@ -66,7 +68,7 @@ class QuizGameActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_game)
 
-        // 1. Inisialisasi View (SESUAI ID DI XML KAMU)
+        // 1. Inisialisasi View
         tvProgress = findViewById(R.id.tvProgress)
         progressBar = findViewById(R.id.progressBar)
         tvTimer = findViewById(R.id.tvTimer)
@@ -89,7 +91,7 @@ class QuizGameActivity : AppCompatActivity() {
 
         // 4. Aksi Tombol Close
         btnClose.setOnClickListener {
-            finish() // Kembali ke menu sebelumnya
+            finish()
         }
     }
 
@@ -101,57 +103,57 @@ class QuizGameActivity : AppCompatActivity() {
             // Ambil data soal
             val currentQuestion = questionList[currentQuestionIndex]
 
-            // Update Teks Pertanyaan & Pilihan
+            // Update UI
             tvQuestion.text = currentQuestion.questionText
             rbOption1.text = currentQuestion.options[0]
             rbOption2.text = currentQuestion.options[1]
             rbOption3.text = currentQuestion.options[2]
             rbOption4.text = currentQuestion.options[3]
 
-            // Update Teks "Soal 1/10"
+            // Update Progress Bar
             val progressText = "Soal ${currentQuestionIndex + 1}/${questionList.size}"
             tvProgress.text = progressText
-
-            // Update Garis Progress Bar
             progressBar.max = questionList.size
             progressBar.progress = currentQuestionIndex + 1
+
+            // --- LOGIKA UBAH TOMBOL JADI "SUBMIT" DI SOAL TERAKHIR ---
+            if (currentQuestionIndex == questionList.size - 1) {
+                btnNext.text = "Submit"
+            } else {
+                btnNext.text = "Selanjutnya"
+            }
 
             // Reset Pilihan RadioButton
             rgOptions.clearCheck()
 
             // Mulai Timer
             startTimer()
-
         } else {
-            // JIKA SOAL HABIS
             finishQuiz()
         }
     }
 
     private fun startTimer() {
-        // 30 Detik
         countDownTimer = object : CountDownTimer(30000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 tvTimer.text = (millisUntilFinished / 1000).toString()
             }
-
             override fun onFinish() {
                 Toast.makeText(this@QuizGameActivity, "Waktu Habis!", Toast.LENGTH_SHORT).show()
-                checkAnswerAndNext(isTimeOut = true) // Pindah otomatis kalau waktu habis
+                checkAnswerAndNext(isTimeOut = true)
             }
         }.start()
     }
 
     private fun checkAnswerAndNext(isTimeOut: Boolean = false) {
         if (isTimeOut) {
-            // Kalau waktu habis, langsung lanjut tanpa nambah skor
+            // Jika waktu habis, langsung lanjut tanpa nambah skor
             currentQuestionIndex++
             setupQuiz()
             return
         }
 
         if (rgOptions.checkedRadioButtonId != -1) {
-            // Cek Jawaban User
             var selectedIndex = -1
             when (rgOptions.checkedRadioButtonId) {
                 R.id.rbOption1 -> selectedIndex = 0
@@ -160,13 +162,14 @@ class QuizGameActivity : AppCompatActivity() {
                 R.id.rbOption4 -> selectedIndex = 3
             }
 
+            // --- HITUNG SKOR (20 POIN PER SOAL) ---
             if (selectedIndex == questionList[currentQuestionIndex].correctAnswerIndex) {
-                score += 10 // Tambah skor
+                score += 20
+                correctAnswers++ // Tambah jumlah benar
             }
 
             currentQuestionIndex++
             setupQuiz()
-
         } else {
             Toast.makeText(this, "Pilih jawaban dulu!", Toast.LENGTH_SHORT).show()
         }
@@ -175,19 +178,14 @@ class QuizGameActivity : AppCompatActivity() {
     private fun finishQuiz() {
         countDownTimer?.cancel()
 
-        // Pindah ke Halaman Hasil (Sementara pakai Toast dulu kalau belum ada ResultActivity)
-        // Kalau sudah ada ResultActivity, uncomment kode di bawah ini:
+        // --- KIRIM DATA LENGKAP KE HALAMAN HASIL ---
+        val intent = Intent(this, QuizResultActivity::class.java)
+        intent.putExtra("SKOR_AKHIR", score)       // Kirim Total Skor
+        intent.putExtra("JUMLAH_BENAR", correctAnswers) // Kirim Jumlah Benar
+        intent.putExtra("TOTAL_SOAL", questionList.size) // Kirim Total Soal
 
-        /*
-        val intent = Intent(this, ResultActivity::class.java)
-        intent.putExtra("SKOR_AKHIR", score)
         startActivity(intent)
-        finish()
-        */
-
-        // Sementara tampilkan skor di layar:
-        Toast.makeText(this, "Kuis Selesai! Skor kamu: $score", Toast.LENGTH_LONG).show()
-        finish()
+        finish() // Tutup halaman kuis
     }
 
     override fun onDestroy() {

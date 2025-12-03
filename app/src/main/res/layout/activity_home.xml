@@ -62,25 +62,6 @@
             android:textColor="#64748B"
             android:layout_marginBottom="24dp"/>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="280dp"
-            android:layout_height="280dp"
-            android:layout_gravity="center_horizontal"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="0dp"
-            app:cardBackgroundColor="#F5F5F5"
-            android:layout_marginBottom="24dp">
-            <ImageView
-                android:id="@+id/ivProfilePicture"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/ic_avatar_default"
-                android:scaleType="centerCrop"
-                android:padding="60dp"
-                app:tint="#757575"
-                android:contentDescription="Foto Profil" />
-        </androidx.cardview.widget.CardView>
-
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"

@@ -32,17 +32,5 @@ class HomeActivity : AppCompatActivity() {
             val intent = Intent(this, CreateQuizActivity::class.java)
             startActivity(intent)
         }
-
-        // 4. KLIK FOTO PROFIL -> Pindah ke ProfileActivity
-        // (Pastikan ID gambar profil di XML kamu adalah @+id/ivProfilePicture)
-        binding.ivProfilePicture.setOnClickListener {
-            // Kita arahkan ke ProfileActivity dulu (Halaman Statistik)
-            // Di sana nanti ada tombol "Edit Profil" jika ingin mengedit
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
-        }
-
-        // Catatan: Jika kamu ingin langsung lompat ke form edit (tanpa lihat statistik dulu),
-        // ganti ProfileActivity::class.java menjadi EditProfileActivity::class.java
     }
 }

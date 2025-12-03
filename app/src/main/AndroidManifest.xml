@@ -35,6 +35,8 @@
         <activity android:name=".AddQuestionActivity" />
         <activity android:name=".ReviewQuizActivity" />
         <activity android:name=".QuizResultActivity" />
+        <activity android:name=".QuizGameActivity" />
+        <activity android:name=".QuizLastActivity" />
 
     </application>
 

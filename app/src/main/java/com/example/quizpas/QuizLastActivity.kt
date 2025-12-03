@@ -13,7 +13,7 @@ class QuizLastActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
     private lateinit var tvTimer: TextView
     private lateinit var rgOptions: RadioGroup
-    private lateinit var btnSubmit: Button // Tombol Submit
+    private lateinit var btnSubmit: Button
     private lateinit var btnClose: ImageView
 
     // Variabel Skor
@@ -22,21 +22,22 @@ class QuizLastActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_quiz_last) // Pastikan layoutnya benar
+        setContentView(R.layout.activity_quiz_last)
 
         // 1. Ambil Skor dari Activity Sebelumnya (jika ada)
+        // Default 0 jika tidak ada data kiriman
         currentScore = intent.getIntExtra("SKOR_SEMENTARA", 0)
 
         // 2. Inisialisasi View
-        tvProgress = findViewById(R.id.tvProgress) // Pastikan ID ini ada di XML
+        tvProgress = findViewById(R.id.tvProgress)
         progressBar = findViewById(R.id.progressBar)
         tvTimer = findViewById(R.id.tvTimer)
         rgOptions = findViewById(R.id.rgOptions)
-
-        // Cek ID tombol di XML kamu, apakah 'btnSubmit' atau 'btnNext'
-        // Jika error, ganti R.id.btnSubmit dengan R.id.btnNext
-        btnSubmit = findViewById(R.id.btnNext)
         btnClose = findViewById(R.id.btnClose)
+
+        // PENTING: Pastikan ID tombol di XML adalah 'btnNext'
+        // Jika di XML namanya 'btnSubmit', ganti baris bawah ini jadi R.id.btnSubmit
+        btnSubmit = findViewById(R.id.btnNext)
 
         // 3. Setup Tampilan Awal
         setupLastQuestion()
@@ -57,7 +58,7 @@ class QuizLastActivity : AppCompatActivity() {
         tvProgress.text = "Soal 10/10"
         progressBar.progress = 10
 
-        // Mulai Timer
+        // Mulai Timer 30 Detik
         startTimer()
     }
 
@@ -82,18 +83,18 @@ class QuizLastActivity : AppCompatActivity() {
         if (selectedId != -1) {
             val selectedButton = findViewById<RadioButton>(selectedId)
 
-            // KUNCI JAWABAN: Sesuaikan teks ini dengan jawaban benar di XML kamu
-            // Misalnya jawaban benarnya "Sapphire Village"
+            // KUNCI JAWABAN
+            // Pastikan tulisan di bawah SAMA PERSIS dengan teks di XML/Layout kamu
             if (selectedButton.text.toString() == "Sapphire Village") {
                 currentScore += 10
             }
         }
 
         // Pindah ke Halaman Result (Skor Akhir)
-        // Pastikan kamu sudah punya 'ResultActivity'
+        // Menggunakan QuizResultActivity (sesuai file yang sudah ada)
         val intent = Intent(this, QuizResultActivity::class.java)
         intent.putExtra("SKOR_AKHIR", currentScore)
         startActivity(intent)
-        finish() // Tutup halaman kuis
+        finish() // Tutup halaman kuis agar tidak bisa kembali
     }
 }
